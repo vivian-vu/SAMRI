@@ -1255,7 +1255,7 @@ def atlas_labels(
 
 	atlas : str, optional
 		Path to an atlas NIfTI file, containing integer values for all voxels.
-	mapping : str or pandas.DataFramr, optional
+	mapping : str or pandas.DataFrame, optional
 		Path to mapping file in CSV format or Pandas Dataframe object, containing columns named according to the values of `structure_column`, `label_column_l`, and `label_column_r`.
 	template : str, optional
 		Path to template file in NIfTI format.
@@ -1271,7 +1271,6 @@ def atlas_labels(
 		The format as which the image files should be saved.
 	"""
 
-
 	if not os.path.exists(target_dir):
 		os.makedirs(target_dir)
 
@@ -1286,16 +1285,16 @@ def atlas_labels(
 		right_label = row[label_column_r]
 		if left_label == right_label:
 			structure_filename = structure.replace(" ", "_")
-			atlas_label(atlas, mapping=mapping, label_names=[structure], display_mode='ortho')
+			atlas_label(atlas, mapping=mapping_df, label_names=[structure], display_mode='ortho')
 			plt.savefig('{}/{}.{}'.format(target_dir,structure_filename,file_format))
 		else:
 			structure_filename = structure.replace(" ", "_")
 			structure_filename = structure.replace("/", "_")
 			structure_filename_l = '{}_l'.format(structure_filename)
-			atlas_label(atlas, mapping=mapping, label_names=[structure], laterality='left', display_mode='ortho')
+			atlas_label(atlas, mapping=mapping_df, label_names=[structure], laterality='left', display_mode='ortho')
 			plt.savefig('{}/{}.{}'.format(target_dir,structure_filename_l,file_format))
 			structure_filename_r = '{}_r'.format(structure_filename)
-			atlas_label(atlas, mapping=mapping, label_names=[structure], laterality='right', display_mode='ortho')
+			atlas_label(atlas, mapping=mapping_df, label_names=[structure], laterality='right', display_mode='ortho')
 			plt.savefig('{}/{}.{}'.format(target_dir,structure_filename_r,file_format))
 
 def slices(heatmap_image,
