@@ -1,6 +1,7 @@
 from samri.pipelines.glm import l1, l1_physio, seed
 
-PREPROCESS_BASE = '/usr/share/samri_bidsdata/preprocessing'
+#PREPROCESS_BASE = '/usr/share/samri_bidsdata/preprocessing'
+PREPROCESS_BASE = '/home/vivian/samri_bidsdata/rs_preprocessing'
 
 def test_l1():
 	l1(PREPROCESS_BASE,
