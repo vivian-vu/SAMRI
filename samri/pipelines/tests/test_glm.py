@@ -9,7 +9,8 @@ def test_l1():
 		match={'session': ['ofMaF'], 'acq':['EPIlowcov']},
 		out_base='/var/tmp/samri_testing/pytest/',
 		workflow_name='l1',
-		)
+		keep_work=True,
+                )
 
 # Takes too long or hangs
 def test_physio():
