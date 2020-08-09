@@ -1,13 +1,13 @@
 from samri.pipelines.glm import l1, l1_physio, seed
 
 #PREPROCESS_BASE = '/usr/share/samri_bidsdata/preprocessing'
-PREPROCESS_BASE = '/home/vivian/samri_bidsdata/rs_preprocessing'
+PREPROCESS_BASE = '/home/vivian/samri_bidsdata/rs_preprocessing/prep/'
 
 def test_l1():
 	l1(PREPROCESS_BASE,
 		mask='mouse',
 		match={'session': ['ofMaF'], 'acq':['EPIlowcov']},
-		out_base='/var/tmp/samri_testing/pytest/',
+		out_base='/home/vivian/samri_bidsdata/rs_l1',
 		workflow_name='l1',
 		keep_work=True,
                 )
