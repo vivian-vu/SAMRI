@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import samri.plotting.maps as maps
 import seaborn as sns
 from os import path
-import pytest
+import pytest, tempfile, shutil
 
 def test_atlas_labels_longtime():
        maps.atlas_labels()
@@ -17,12 +17,13 @@ def test_atlas_labels():
        maps.atlas_labels(mapping=mapping)
 
 def test_slices():
+       tmp_out_base = tempfile.mkdtemp(dir = '/var/tmp/samri_testing/pytest/')
        bindata_dir = '/usr/share/samri_bidsdata'
        heatmap_image = '{}/l1/sub-4007/ses-ofM/sub-4007_ses-ofM_task-JogB_acq-EPIlowcov_run-1_cbv_tstat.nii.gz'.format(bindata_dir)
        contour_image = '{}/l1/sub-4007/ses-ofMaF/sub-4007_ses-ofMaF_task-JogB_acq-EPIlowcov_run-1_cbv_tstat.nii.gz'.format(bindata_dir)
        maps.slices(heatmap_image,
 	      contour_image=contour_image,
-	      save_as='test_slices.pdf',
+	      save_as='{}/test_slices.pdf'.format(tmp_out_base),
 	      )
 
 def test_population_roi_over_time():
@@ -75,4 +76,5 @@ def test_population_roi_over_time():
 	       alpha=0.8,
 	       )
 
-       plt.savefig('_test_population_roi_over_time.png')
+       tmp_out_base = tempfile.mkdtemp(dir = '/var/tmp/samri_testing/pytest/')
+       plt.savefig('{}/_test_population_roi_over_time.png'.format(tmp_out_base))

@@ -7,6 +7,7 @@ def test_activity_timecourse_with_inlay():
 	import samri.plotting.maps as maps
 	import seaborn as sns
 	from os import path
+        import tempfile, shutil
 
 	# Style elements
 	palette=["#56B4E9", "#E69F00"]
@@ -57,5 +58,8 @@ def test_activity_timecourse_with_inlay():
 		alpha=0.8,
 		)
 
-	plt.savefig('_activity_timecourse_with_inlay.png')
+        tmp_out_base = tempfile.mkdtemp(dir = '/var/tmp/samri_testing/pytest/')
+	plt.savefig('{}/_activity_timecourse_with_inlay.png'.format(tmp_out_base))
+
+        shutil.rmtree(tmp_out_base)
 

@@ -1,5 +1,6 @@
 def test_multi_roi_timeseries():
 	import matplotlib.pyplot as plt
+        import tempfile, shutil
 	from os import path
 	from samri.plotting import summary, timeseries
 	from samri.utilities import bids_substitution_iterator
@@ -43,8 +44,10 @@ def test_multi_roi_timeseries():
 	style_file = path.join(path.dirname(path.realpath(__file__)),'../samri_multiple-ts.conf')
 	plt.style.use(style_file)
 
-	timeseries.multi(timecourses, designs, events_dfs, subplot_titles,
+	tmp_out_base = tempfile.mkdtemp(dir = '/var/tmp/samri_testing/pytest/')
+        timeseries.multi(timecourses, designs, events_dfs, subplot_titles,
 		quantitative=False,
-		save_as='_multi_roi_timeseries.pdf',
+		save_as='{}/_multi_roi_timeseries.pdf'.format(tmp_out_base),
 		)
+        shutil.rmtree(tmp_out_base)
 

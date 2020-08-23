@@ -28,19 +28,24 @@ def test_ts():
 
 def test_atlasassignment():
 	from samri.report.roi import atlasassignment
+        import tempfile, shutil
 
-	atlasassignment(data_path='/usr/share/mouse-brain-atlases/dsurqec_200micron_roi-dr.nii',
+	tmp_out_base = tempfile.mkdtemp(dir = '/var/tmp/samri_testing/pytest/')
+
+        atlasassignment(data_path='/usr/share/mouse-brain-atlases/dsurqec_200micron_roi-dr.nii',
 		null_label=0.0,
 		verbose=False,
 		lateralized=False,
-		save_as='/var/tmp/samri_testing/pytest/atlasassignment.csv',
+		save_as='{}/atlasassignment.csv'.format(tmp_out_base),
 		)
 	atlasassignment(data_path='/usr/share/mouse-brain-atlases/dsurqec_200micron_roi-dr.nii',
 		null_label=0.0,
 		verbose=False,
 		lateralized=True,
-		save_as='/var/tmp/samri_testing/pytest/atlasassignment_lateralized.csv',
+		save_as='{}/atlasassignment_lateralized.csv'.format(tmp_out_base),
 		)
+
+        shutil.rmtree(tmp_out_base)
 
 def test_erode():
 	from samri.report.roi import erode

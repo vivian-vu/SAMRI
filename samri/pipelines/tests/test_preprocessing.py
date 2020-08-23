@@ -4,7 +4,7 @@ import tempfile
 import shutil
 
 BIDS_BASE = '/home/vivian/samri_bidsdata/bids_rs'
-#tmp_out_base = tempfile.mkdtemp(dir = '/home/vivian/samri_bidsdata/')
+tmp_out_base = tempfile.mkdtemp(dir = '/home/vivian/samri_bidsdata/')
 
 # Takes too long
 def test_generic():
@@ -16,4 +16,4 @@ def test_generic():
 		out_base=tmp_out_base,
 		workflow_name='prep',
 		)
-       # shutil.rmtree(tmp_out_base)
+        shutil.rmtree(tmp_out_base)
