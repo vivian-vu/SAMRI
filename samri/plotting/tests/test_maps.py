@@ -22,9 +22,9 @@ def test_slices():
        heatmap_image = '{}/l1/sub-4007/ses-ofM/sub-4007_ses-ofM_task-JogB_acq-EPIlowcov_run-1_cbv_tstat.nii.gz'.format(bindata_dir)
        contour_image = '{}/l1/sub-4007/ses-ofMaF/sub-4007_ses-ofMaF_task-JogB_acq-EPIlowcov_run-1_cbv_tstat.nii.gz'.format(bindata_dir)
        maps.slices(heatmap_image,
-	      contour_image=contour_image,
-	      save_as='{}/test_slices.pdf'.format(tmp_out_base),
-	      )
+              contour_image=contour_image,
+              save_as='{}/test_slices.pdf'.format(tmp_out_base),
+              )
 
 def test_population_roi_over_time():
        # Style elements
@@ -36,12 +36,12 @@ def test_population_roi_over_time():
 
        df = df.rename(columns={'t':'Mean t-Statistic'})
        df['Session']=df['Session'].map({
-	       'ofM':'naïve',
-	       'ofMaF':'acute',
-	       'ofMcF1':'chronic/2w',
-	       'ofMcF2':'chronic/4w',
-	       'ofMpF':'post',
-	       })
+               'ofM':'naïve',
+               'ofMaF':'acute',
+               'ofMcF1':'chronic/2w',
+               'ofMcF2':'chronic/4w',
+               'ofMpF':'post',
+               })
 
 
        # definitions for the axes
@@ -55,26 +55,26 @@ def test_population_roi_over_time():
 
        ax1 = plt.axes(session_coordinates)
        sns.pointplot(
-	      x='Session',
-	      y='Mean t-Statistic',
-	      units='subject',
-	      data=df,
-	      hue='treatment',
-	      dodge=True,
-	      palette=palette,
-	      order=['naïve','acute','chronic/2w','chronic/4w','post'],
-	      ax=ax1,
-	      ci=95,
-	      )
+              x='Session',
+              y='Mean t-Statistic',
+              units='subject',
+              data=df,
+              hue='treatment',
+              dodge=True,
+              palette=palette,
+              order=['naïve','acute','chronic/2w','chronic/4w','post'],
+              ax=ax1,
+              ci=95,
+              )
 
        ax2 = plt.axes(roi_coordinates)
        maps.atlas_label('/usr/share/mouse-brain-atlases/dsurqec_200micron_roi-dr.nii',
-	       scale=0.3,
-	       color="#E69F00",
-	       ax=ax2,
-	       annotate=False,
-	       alpha=0.8,
-	       )
+               scale=0.3,
+               color="#E69F00",
+               ax=ax2,
+               annotate=False,
+               alpha=0.8,
+               )
 
        tmp_out_base = tempfile.mkdtemp(dir = '/var/tmp/samri_testing/pytest/')
        plt.savefig('{}/_test_population_roi_over_time.png'.format(tmp_out_base))
